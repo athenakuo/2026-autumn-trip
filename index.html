@@ -106,6 +106,8 @@
   /* ── Main ── */
   .main { padding: 0 0 80px; }
 
+  section { scroll-margin-top: 96px; }
+
   /* ── Flight banner ── */
   .flight-banner {
     background: var(--moss-light);
@@ -430,6 +432,36 @@
     color: var(--muted);
     letter-spacing: 0.08em;
   }
+  /* ── Notion FAB ── */
+  .notion-fab {
+    position: fixed;
+    bottom: 24px;
+    right: 20px;
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    background: var(--moss);
+    color: var(--paper);
+    text-decoration: none;
+    padding: 10px 16px 10px 13px;
+    border-radius: 24px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+    font-family: var(--font-zh);
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    transition: background 0.2s, transform 0.15s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .notion-fab:active {
+    background: var(--moss-light);
+    transform: scale(0.97);
+  }
+  .notion-fab-icon {
+    font-size: 15px;
+    line-height: 1;
+  }
 </style>
 </head>
 <body>
@@ -642,7 +674,7 @@
         </div>
         <div class="day-header-info">
           <div class="day-region">Naoshima</div>
-          <div class="day-hotel empty">↩ VIA INN Okayama</div>
+          <div class="day-hotel-en">VIA INN Okayama</div>
         </div>
       </div>
       <div class="day-body">
@@ -688,7 +720,7 @@
           <div class="activity-list">
             <div class="activity-item">
               <span class="activity-time">午後</span>
-              <span class="activity-text">醬油藏・橄欖公園一帶（租車較方便）</span>
+              <span class="activity-text">醬油藏・橄欖公園一帶</span>
             </div>
             <div class="activity-item">
               <span class="activity-time">晚</span>
@@ -698,9 +730,9 @@
         </div>
         <div class="divider-line"></div>
         <div class="ferry-block">
-          <div class="ferry-label">船班 · 10/7　新岡山港 ⇄ 小豆島</div>
+          <div class="ferry-label">船班 · 10/7　新岡山港 → 小豆島</div>
           <div class="ferry-row">
-            <span class="ferry-direction">去　新岡山→</span>
+            <span class="ferry-direction">新岡山→小豆島</span>
             <input class="ferry-input" type="text" placeholder="__:__ 班">
           </div>
         </div>
@@ -810,6 +842,11 @@
 <footer class="site-footer">
   北海道 · 瀨戶內海 &nbsp;·&nbsp; 2025.09.30 – 10.09
 </footer>
+
+<a class="notion-fab" href="https://app.notion.com/p/2026-1df09ee728ce808ca6dbfc640de5b96f?source=copy_link" target="_blank">
+  <span class="notion-fab-icon">✎</span>
+  在 Notion 編輯
+</a>
 
 <script>
   function toggleTodo(el) {
