@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>北海道 · 瀨戶內海 2025</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;600&family=Noto+Serif+TC:wght@300;400&family=Inter:wght@300;400;500&display=swap');
+
+  :root {
+    --ink: #1C1E1A;
+    --paper: #F2EFE8;
+    --paper-dim: #E8E4DB;
+    --moss: #2D4A3E;
+    --moss-light: #3D6356;
+    --gold: #C4A96B;
+    --muted: #8A8780;
+    --done-bg: #D8EAD8;
+    --done-text: #2A5030;
+    --pending-bg: #F0E6CC;
+    --pending-text: #7A5A20;
+    --card-bg: #FAFAF7;
+    --border: #D8D4CC;
+    --input-bg: #F4F1EA;
+    --font-zh: 'Noto Sans TC', sans-serif;
+    --font-en: 'Inter', sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-zh);
+    font-weight: 400;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 15px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .en { font-family: var(--font-en); }
+
+  /* ── Header ── */
+  .site-header {
+    background: var(--moss);
+    color: var(--paper);
+    padding: 36px 20px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .header-eyebrow {
+    font-family: var(--font-en);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 5px;
+  }
+  .header-title {
+    font-family: var(--font-zh);
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    line-height: 1.3;
+  }
+  .header-meta {
+    font-family: var(--font-en);
+    font-size: 11px;
+    font-weight: 300;
+    color: rgba(242,239,232,0.5);
+    margin-top: 6px;
+    letter-spacing: 0.06em;
+  }
+
+  /* ── Nav ── */
+  .nav-tabs {
+    display: flex;
+    background: var(--moss);
+    border-top: 1px solid rgba(255,255,255,0.08);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .nav-tabs::-webkit-scrollbar { display: none; }
+  .nav-tab {
+    font-family: var(--font-en);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    color: rgba(242,239,232,0.5);
+    padding: 10px 18px;
+    white-space: nowrap;
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+    text-transform: uppercase;
+  }
+  .nav-tab:hover, .nav-tab.active {
+    color: var(--gold);
+    border-bottom-color: var(--gold);
+  }
+
+  /* ── Main ── */
+  .main { padding: 0 0 80px; }
+
+  /* ── Flight banner ── */
+  .flight-banner {
+    background: var(--moss-light);
+    color: var(--paper);
+    padding: 14px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+  }
+  .flight-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .flight-label {
+    font-family: var(--font-zh);
+    font-size: 10px;
+    font-weight: 400;
+    color: var(--gold);
+    min-width: 28px;
+  }
+  .flight-code {
+    font-family: var(--font-en);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+  }
+  .flight-route {
+    font-family: var(--font-en);
+    font-size: 12px;
+    font-weight: 300;
+    opacity: 0.7;
+  }
+
+  /* ── Region divider ── */
+  .region-divider {
+    display: flex;
+    align-items: center;
+    padding: 28px 20px 14px;
+    gap: 12px;
+  }
+  .region-label {
+    font-family: var(--font-en);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    color: var(--muted);
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .region-name {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 20px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    color: var(--moss);
+  }
+  .region-line {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ── Day card ── */
+  .day-card {
+    margin: 0 16px 12px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .day-header {
+    display: flex;
+    align-items: stretch;
+    border-bottom: 1px solid var(--border);
+  }
+  .day-date-block {
+    background: var(--moss);
+    color: var(--paper);
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 68px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+  .day-date-num {
+    font-family: var(--font-en);
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.01em;
+  }
+  .day-date-sub {
+    font-family: var(--font-zh);
+    font-size: 10px;
+    font-weight: 400;
+    opacity: 0.55;
+    margin-top: 4px;
+  }
+  .day-header-info {
+    padding: 10px 14px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 3px;
+  }
+  .day-region {
+    font-family: var(--font-en);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+  .day-hotel {
+    font-family: var(--font-zh);
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--ink);
+    line-height: 1.4;
+  }
+  .day-hotel-en {
+    font-family: var(--font-en);
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--ink);
+    line-height: 1.4;
+  }
+  .day-hotel.empty, .day-hotel-en.empty {
+    color: var(--muted);
+    font-style: italic;
+    font-size: 13px;
+  }
+
+  /* ── Day body ── */
+  .day-body {
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .day-section-label {
+    font-family: var(--font-en);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 5px;
+  }
+  .activity-list {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .activity-item {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .activity-time {
+    font-family: var(--font-zh);
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--muted);
+    min-width: 26px;
+    padding-top: 2px;
+    flex-shrink: 0;
+  }
+  .activity-text {
+    font-family: var(--font-zh);
+    font-size: 14px;
+    color: var(--ink);
+    line-height: 1.5;
+  }
+  .detail-text {
+    font-family: var(--font-zh);
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+  .detail-text .en {
+    font-size: 13px;
+    font-weight: 400;
+  }
+  .divider-line {
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ── Tags ── */
+  .tag {
+    display: inline-block;
+    font-family: var(--font-en);
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    padding: 2px 7px;
+    border-radius: 3px;
+    margin: 2px 3px 2px 0;
+    text-transform: uppercase;
+    vertical-align: middle;
+  }
+  .tag-done { background: var(--done-bg); color: var(--done-text); }
+  .tag-note { background: #E4EAF4; color: #2A3A6A; }
+
+  /* ── Ferry input ── */
+  .ferry-block {
+    background: var(--input-bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 10px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+  .ferry-label {
+    font-family: var(--font-en);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+  .ferry-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .ferry-direction {
+    font-family: var(--font-zh);
+    font-size: 12px;
+    color: var(--muted);
+    min-width: 48px;
+    flex-shrink: 0;
+  }
+  .ferry-input {
+    flex: 1;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 5px 9px;
+    font-family: var(--font-en);
+    font-size: 13px;
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.15s;
+  }
+  .ferry-input:focus {
+    border-color: var(--moss-light);
+  }
+  .ferry-input::placeholder {
+    color: #C0BAB0;
+    font-size: 12px;
+  }
+
+  /* ── Todo ── */
+  .todo-section { margin: 0 16px; }
+  .todo-list {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .todo-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    transition: background 0.15s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .todo-item:last-child { border-bottom: none; }
+  .todo-item:active { background: var(--paper-dim); }
+  .todo-item.checked { background: #F6FAF6; }
+
+  .todo-check {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 1.5px solid var(--border);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .todo-item.checked .todo-check {
+    background: var(--done-bg);
+    border-color: var(--done-text);
+  }
+  .todo-item.checked .todo-check::after {
+    content: '✓';
+    font-size: 10px;
+    color: var(--done-text);
+    font-weight: bold;
+  }
+  .todo-text {
+    font-family: var(--font-zh);
+    font-size: 14px;
+    color: var(--ink);
+    flex: 1;
+    transition: color 0.2s;
+  }
+  .todo-item.checked .todo-text {
+    color: var(--muted);
+    text-decoration: line-through;
+  }
+
+  /* ── Footer ── */
+  .site-footer {
+    text-align: center;
+    padding: 40px 20px 60px;
+    font-family: var(--font-en);
+    font-size: 10px;
+    font-weight: 300;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-eyebrow">Travel · 2025</div>
+  <div class="header-title">北海道 · 瀨戶內海</div>
+  <div class="header-meta">09/30 — 10/09 &nbsp;·&nbsp; 10 泊</div>
+</header>
+
+<nav class="nav-tabs">
+  <a class="nav-tab active" href="#flights">Flights</a>
+  <a class="nav-tab" href="#hokkaido">北海道</a>
+  <a class="nav-tab" href="#setouchi">瀨戶內海</a>
+  <a class="nav-tab" href="#todo">待辦</a>
+</nav>
+
+<main class="main">
+
+  <!-- 班機 -->
+  <section id="flights">
+    <div class="region-divider">
+      <span class="region-label">Flights</span>
+      <span class="region-name">班機</span>
+      <div class="region-line"></div>
+    </div>
+    <div class="flight-banner">
+      <div class="flight-row">
+        <span class="flight-label">去程</span>
+        <span class="flight-code">IT234</span>
+        <span class="flight-route">TPE 06:20 → CTS 11:05 · 09/30</span>
+      </div>
+      <div class="flight-row">
+        <span class="flight-label">內陸</span>
+        <span class="flight-code">NH380</span>
+        <span class="flight-route">CTS 14:40 → OKJ 16:40 · 10/05</span>
+      </div>
+      <div class="flight-row">
+        <span class="flight-label">回程</span>
+        <span class="flight-code">IT215</span>
+        <span class="flight-route">OKJ 15:55 → TPE 17:40 · 10/09</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 北海道 -->
+  <section id="hokkaido">
+    <div class="region-divider">
+      <span class="region-label">Hokkaido</span>
+      <span class="region-name">北海道</span>
+      <div class="region-line"></div>
+    </div>
+
+    <!-- 9/30 -->
+    <div class="day-card">
+      <div class="day-header">
+        <div class="day-date-block">
+          <div class="day-date-num">9/30</div>
+          <div class="day-date-sub">三</div>
+        </div>
+        <div class="day-header-info">
+          <div class="day-region">Otaru</div>
+          <div class="day-hotel">OMO5 小樽 <span class="tag tag-done">已付清</span></div>
+        </div>
+      </div>
+      <div class="day-body">
+        <div>
+          <div class="day-section-label">行程</div>
+          <div class="activity-list">
+            <div class="activity-item">
+              <span class="activity-time">晚</span>
+              <span class="activity-text">小樽運河散步・出拔小路覓食</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 10/1 -->
+    <div class="day-card">
+      <div class="day-header">
+        <div class="day-date-block">
+          <div class="day-date-num">10/1</div>
+          <div class="day-date-sub">四</div>
+        </div>
+        <div class="day-header-info">
+          <div class="day-region">Yoichi → Sapporo</div>
+          <div class="day-hotel">ランプライトブックスホテル札幌 <span class="tag tag-note">現地付款</span></div>
+        </div>
+      </div>
+      <div class="day-body">
+        <div>
+          <div class="day-section-label">行程</div>
+          <div class="activity-list">
+            <div class="activity-item">
+              <span class="activity-time">午</span>
+              <span class="activity-text">余市蒸餾所（Nikka Whisky）</span>
+            </div>
+            <div class="activity-item">
+              <span class="activity-time">晚</span>
+              <span class="activity-text">移動至札幌 Check-in</span>
+            </div>
+          </div>
+        </div>
+        <div class="divider-line"></div>
+        <div class="detail-text"><span class="en">Check-in 14:00</span>　Superior Double，2大人<br>¥27,304（含稅）　現地付款</div>
+      </div>
+    </div>
+
+    <!-- 10/2 -->
+    <div class="day-card">
+      <div class="day-header">
+        <div class="day-date-block">
+          <div class="day-date-num">10/2</div>
+          <div class="day-date-sub">五</div>
+        </div>
+        <div class="day-header-info">
+          <div class="day-region">Sapporo</div>
+          <div class="day-hotel">ランプライトブックスホテル札幌</div>
+        </div>
+      </div>
+      <div class="day-body">
+        <div class="detail-text">自由行程</div>
+      </div>
+    </div>
+
+    <!-- 10/3 -->
+    <div class="day-card">
+      <div class="day-header">
+        <div class="day-date-block">
+          <div class="day-date-num">10/3</div>
+          <div class="day-date-sub">六</div>
+        </div>
+        <div class="day-header-info">
+          <div class="day-region">Sapporo</div>
+          <div class="day-hotel">薄野格蘭貝爾飯店 <span class="tag tag-done">已付清</span></div>
+        </div>
+      </div>
+      <div class="day-body">
+        <div class="detail-text">自由行程</div>
+      </div>
+    </div>
+
+    <!-- 10/4 -->
+    <div class="day-card">
+      <div class="day-header">
+        <div class="day-date-block">
+          <div class="day-date-num">10/4</div>
+          <div class="day-date-sub">日</div>
+        </div>
+        <div class="day-header-info">
+          <div class="day-region">Sapporo</div>
+          <div class="day-hotel">薄野格蘭貝爾飯店</div>
+        </div>
+      </div>
+      <div class="day-body">
+        <div>
+          <div class="day-section-label">行程</div>
+          <div class="activity-list">
+            <div class="activity-item">
+              <span class="activity-time">早</span>
+              <span class="activity-text">札幌馬拉松</span>
+            </div>
+            <div class="activity-item">
+              <span class="activity-time">後</span>
+              <span class="activity-text">賽後補給 / 市區緩慢閒晃</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- 瀨戶內海 -->
+  <section id="setouchi">
+    <div class="region-divider">
+      <span class="region-label">Setouchi</span>
+      <span class="region-name">瀨戶內海</span>
+      <div class="region-line"></div>
+    </div>
+
+    <!-- 10/5 -->
+    <div class="day-card">
+      <div class="day-header">
+        <div class="day-date-block">
+          <div class="day-date-num">10/5</div>
+          <div class="day-date-sub">一</div>
+        </div>
+        <div class="day-header-info">
+          <div class="day-region">Okayama</div>
+          <div class="day-hotel-en">VIA INN Okayama <span class="tag tag-note">延後扣款</span></div>
+        </div>
+      </div>
+      <div class="day-body">
+        <div class="detail-text">
+          <span class="en">Check-in 15:00 · Check-out 10/7 10:00</span><br>
+          岡山 ⇄ 宇野港 往返基地<br>
+          <span class="en">10/2 Agoda</span> 扣款
+        </div>
+      </div>
+    </div>
+
+    <!-- 10/6 -->
+    <div class="day-card">
+      <div class="day-header">
+        <div class="day-date-block">
+          <div class="day-date-num">10/6</div>
+          <div class="day-date-sub">二</div>
+        </div>
+        <div class="day-header-info">
+          <div class="day-region">Naoshima</div>
+          <div class="day-hotel empty">↩ VIA INN Okayama</div>
+        </div>
+      </div>
+      <div class="day-body">
+        <div>
+          <div class="day-section-label">行程</div>
+          <div class="activity-list">
+            <div class="activity-item">
+              <span class="activity-time"></span>
+              <span class="activity-text">直島</span>
+            </div>
+          </div>
+        </div>
+        <div class="divider-line"></div>
+        <div class="ferry-block">
+          <div class="ferry-label">船班 · 10/6　宇野港 ⇄ 直島</div>
+          <div class="ferry-row">
+            <span class="ferry-direction">宇野→直島</span>
+            <input class="ferry-input" type="text" placeholder="__:__ 班">
+          </div>
+          <div class="ferry-row">
+            <span class="ferry-direction">直島→宇野</span>
+            <input class="ferry-input" type="text" placeholder="__:__ 班">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 10/7 -->
+    <div class="day-card">
+      <div class="day-header">
+        <div class="day-date-block">
+          <div class="day-date-num">10/7</div>
+          <div class="day-date-sub">三</div>
+        </div>
+        <div class="day-header-info">
+          <div class="day-region">Shodoshima</div>
+          <div class="day-hotel-en">edit x seven</div>
+        </div>
+      </div>
+      <div class="day-body">
+        <div>
+          <div class="day-section-label">行程</div>
+          <div class="activity-list">
+            <div class="activity-item">
+              <span class="activity-time">午後</span>
+              <span class="activity-text">醬油藏・橄欖公園一帶（租車較方便）</span>
+            </div>
+            <div class="activity-item">
+              <span class="activity-time">晚</span>
+              <span class="activity-text">島內居酒屋覓食</span>
+            </div>
+          </div>
+        </div>
+        <div class="divider-line"></div>
+        <div class="ferry-block">
+          <div class="ferry-label">船班 · 10/7　新岡山港 ⇄ 小豆島</div>
+          <div class="ferry-row">
+            <span class="ferry-direction">去　新岡山→</span>
+            <input class="ferry-input" type="text" placeholder="__:__ 班">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 10/8 -->
+    <div class="day-card">
+      <div class="day-header">
+        <div class="day-date-block">
+          <div class="day-date-num">10/8</div>
+          <div class="day-date-sub">四</div>
+        </div>
+        <div class="day-header-info">
+          <div class="day-region">Okayama</div>
+          <div class="day-hotel-en">Dormy Inn Okayama Hot Springs</div>
+        </div>
+      </div>
+      <div class="day-body">
+        <div>
+          <div class="day-section-label">行程</div>
+          <div class="activity-list">
+            <div class="activity-item">
+              <span class="activity-time">早</span>
+              <span class="activity-text">edit x seven 早餐</span>
+            </div>
+            <div class="activity-item">
+              <span class="activity-time">午後</span>
+              <span class="activity-text">小豆島 → 豐島 → 岡山</span>
+            </div>
+          </div>
+        </div>
+        <div class="divider-line"></div>
+        <div class="ferry-block">
+          <div class="ferry-label">船班 · 10/8　小豆島 → 豐島 → 宇野</div>
+          <div class="ferry-row">
+            <span class="ferry-direction">小豆→豐島</span>
+            <input class="ferry-input" type="text" placeholder="__:__ 班">
+          </div>
+          <div class="ferry-row">
+            <span class="ferry-direction">豐島→宇野</span>
+            <input class="ferry-input" type="text" placeholder="__:__ 班">
+          </div>
+        </div>
+        <div class="detail-text"><span class="en">Check-in 15:00</span></div>
+      </div>
+    </div>
+
+    <!-- 10/9 -->
+    <div class="day-card">
+      <div class="day-header">
+        <div class="day-date-block">
+          <div class="day-date-num">10/9</div>
+          <div class="day-date-sub">五</div>
+        </div>
+        <div class="day-header-info">
+          <div class="day-region">Departure</div>
+          <div class="day-hotel empty">— 啟程返台</div>
+        </div>
+      </div>
+      <div class="day-body">
+        <div class="detail-text"><span class="en">IT215 · OKJ 15:55 → TPE 17:40</span></div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- 待辦 -->
+  <section id="todo">
+    <div class="region-divider">
+      <span class="region-label">Checklist</span>
+      <span class="region-name">待辦</span>
+      <div class="region-line"></div>
+    </div>
+    <div class="todo-section">
+      <div class="todo-list">
+        <div class="todo-item checked" onclick="toggleTodo(this)">
+          <div class="todo-check"></div>
+          <span class="todo-text">買 ANA 直飛（CTS → OKJ）</span>
+        </div>
+        <div class="todo-item checked" onclick="toggleTodo(this)">
+          <div class="todo-check"></div>
+          <span class="todo-text">小樽 OMO5 訂房</span>
+        </div>
+        <div class="todo-item checked" onclick="toggleTodo(this)">
+          <div class="todo-check"></div>
+          <span class="todo-text">小豆島訂住宿（edit x seven）</span>
+        </div>
+        <div class="todo-item" onclick="toggleTodo(this)">
+          <div class="todo-check"></div>
+          <span class="todo-text">租車</span>
+        </div>
+        <div class="todo-item" onclick="toggleTodo(this)">
+          <div class="todo-check"></div>
+          <span class="todo-text">直島 / 豐島美術館預約</span>
+        </div>
+        <div class="todo-item" onclick="toggleTodo(this)">
+          <div class="todo-check"></div>
+          <span class="todo-text">查船班時刻</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  北海道 · 瀨戶內海 &nbsp;·&nbsp; 2025.09.30 – 10.09
+</footer>
+
+<script>
+  function toggleTodo(el) {
+    el.classList.toggle('checked');
+  }
+</script>
+
+</body>
+</html>
