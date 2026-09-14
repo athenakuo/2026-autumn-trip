@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>北海道 · 瀨戶內海 2025</title>
+<title>北海道 · 瀨戶內海 2026</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;600&family=Noto+Serif+TC:wght@300;400&family=Inter:wght@300;400;500&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;600&family=Noto+Serif+TC:wght@400&family=Inter:wght@300;400;500&display=swap');
 
   :root {
     --ink: #1C1E1A;
@@ -17,13 +17,12 @@
     --muted: #8A8780;
     --done-bg: #D8EAD8;
     --done-text: #2A5030;
-    --pending-bg: #F0E6CC;
-    --pending-text: #7A5A20;
     --card-bg: #FAFAF7;
     --border: #D8D4CC;
     --input-bg: #F4F1EA;
     --font-zh: 'Noto Sans TC', sans-serif;
     --font-en: 'Inter', sans-serif;
+    --font-serif: 'Noto Serif TC', serif;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -38,8 +37,6 @@
     line-height: 1.65;
     -webkit-font-smoothing: antialiased;
   }
-
-  .en { font-family: var(--font-en); }
 
   /* ── Header ── */
   .site-header {
@@ -105,7 +102,6 @@
 
   /* ── Main ── */
   .main { padding: 0 0 80px; }
-
   section { scroll-margin-top: 96px; }
 
   /* ── Flight banner ── */
@@ -125,7 +121,6 @@
   .flight-label {
     font-family: var(--font-zh);
     font-size: 10px;
-    font-weight: 400;
     color: var(--gold);
     min-width: 28px;
   }
@@ -159,7 +154,7 @@
     white-space: nowrap;
   }
   .region-name {
-    font-family: 'Noto Serif TC', serif;
+    font-family: var(--font-serif);
     font-size: 20px;
     font-weight: 400;
     letter-spacing: 0.1em;
@@ -228,14 +223,12 @@
   .day-hotel {
     font-family: var(--font-zh);
     font-size: 14px;
-    font-weight: 400;
     color: var(--ink);
     line-height: 1.4;
   }
   .day-hotel-en {
     font-family: var(--font-en);
     font-size: 14px;
-    font-weight: 400;
     color: var(--ink);
     line-height: 1.4;
   }
@@ -274,9 +267,8 @@
   .activity-time {
     font-family: var(--font-zh);
     font-size: 12px;
-    font-weight: 400;
     color: var(--muted);
-    min-width: 26px;
+    min-width: 32px;
     padding-top: 2px;
     flex-shrink: 0;
   }
@@ -292,13 +284,44 @@
     color: var(--muted);
     line-height: 1.7;
   }
-  .detail-text .en {
-    font-size: 13px;
-    font-weight: 400;
+  .divider-line { height: 1px; background: var(--border); }
+
+  /* ── Ferry block (static) ── */
+  .ferry-block {
+    background: var(--input-bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 10px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
   }
-  .divider-line {
-    height: 1px;
-    background: var(--border);
+  .ferry-label {
+    font-family: var(--font-en);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 2px;
+  }
+  .ferry-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .ferry-direction {
+    font-family: var(--font-zh);
+    font-size: 12px;
+    color: var(--muted);
+    min-width: 60px;
+    flex-shrink: 0;
+  }
+  .ferry-time {
+    font-family: var(--font-en);
+    font-size: 13px;
+    color: var(--ink);
+    font-weight: 400;
   }
 
   /* ── Tags ── */
@@ -316,58 +339,19 @@
   }
   .tag-done { background: var(--done-bg); color: var(--done-text); }
   .tag-note { background: #E4EAF4; color: #2A3A6A; }
+  .tag-pending { background: #F0E6CC; color: #7A5A20; }
 
-  /* ── Ferry input ── */
-  .ferry-block {
-    background: var(--input-bg);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 10px 12px;
-    display: flex;
-    flex-direction: column;
-    gap: 7px;
+  /* ── Map links ── */
+  .map-link {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1px;
+    transition: border-color 0.15s, color 0.15s;
   }
-  .ferry-label {
-    font-family: var(--font-en);
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    color: var(--muted);
-    text-transform: uppercase;
-  }
-  .ferry-row {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .ferry-direction {
-    font-family: var(--font-zh);
-    font-size: 12px;
-    color: var(--muted);
-    min-width: 48px;
-    flex-shrink: 0;
-  }
-  .ferry-input {
-    flex: 1;
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 5px 9px;
-    font-family: var(--font-en);
-    font-size: 13px;
-    color: var(--ink);
-    outline: none;
-    transition: border-color 0.15s;
-  }
-  .ferry-input:focus {
-    border-color: var(--moss-light);
-  }
-  .ferry-input::placeholder {
-    color: #C0BAB0;
-    font-size: 12px;
-  }
+  .map-link:hover { color: var(--moss); border-bottom-color: var(--moss); }
 
-  /* ── Todo ── */
+  /* ── Todo (static) ── */
   .todo-section { margin: 0 16px; }
   .todo-list {
     background: var(--card-bg);
@@ -381,46 +365,37 @@
     gap: 12px;
     padding: 12px 14px;
     border-bottom: 1px solid var(--border);
-    cursor: pointer;
-    transition: background 0.15s;
-    -webkit-tap-highlight-color: transparent;
   }
   .todo-item:last-child { border-bottom: none; }
-  .todo-item:active { background: var(--paper-dim); }
-  .todo-item.checked { background: #F6FAF6; }
-
   .todo-check {
     width: 18px;
     height: 18px;
     border-radius: 50%;
-    border: 1.5px solid var(--border);
     flex-shrink: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background 0.2s, border-color 0.2s;
   }
-  .todo-item.checked .todo-check {
+  .todo-check.done {
     background: var(--done-bg);
-    border-color: var(--done-text);
+    border: 1.5px solid var(--done-text);
   }
-  .todo-item.checked .todo-check::after {
+  .todo-check.done::after {
     content: '✓';
     font-size: 10px;
     color: var(--done-text);
     font-weight: bold;
   }
+  .todo-check.pending {
+    border: 1.5px solid var(--border);
+  }
   .todo-text {
     font-family: var(--font-zh);
     font-size: 14px;
-    color: var(--ink);
     flex: 1;
-    transition: color 0.2s;
   }
-  .todo-item.checked .todo-text {
-    color: var(--muted);
-    text-decoration: line-through;
-  }
+  .todo-text.done { color: var(--muted); text-decoration: line-through; }
+  .todo-text.pending { color: var(--ink); }
 
   /* ── Footer ── */
   .site-footer {
@@ -432,6 +407,7 @@
     color: var(--muted);
     letter-spacing: 0.08em;
   }
+
   /* ── Notion FAB ── */
   .notion-fab {
     position: fixed;
@@ -449,25 +425,17 @@
     box-shadow: 0 4px 16px rgba(0,0,0,0.25);
     font-family: var(--font-zh);
     font-size: 13px;
-    font-weight: 400;
-    letter-spacing: 0.04em;
     transition: background 0.2s, transform 0.15s;
     -webkit-tap-highlight-color: transparent;
   }
-  .notion-fab:active {
-    background: var(--moss-light);
-    transform: scale(0.97);
-  }
-  .notion-fab-icon {
-    font-size: 15px;
-    line-height: 1;
-  }
+  .notion-fab:active { background: var(--moss-light); transform: scale(0.97); }
+  .notion-fab-icon { font-size: 15px; line-height: 1; }
 </style>
 </head>
 <body>
 
 <header class="site-header">
-  <div class="header-eyebrow">Travel · 2025</div>
+  <div class="header-eyebrow">Travel · 2026</div>
   <div class="header-title">北海道 · 瀨戶內海</div>
   <div class="header-meta">09/30 — 10/09 &nbsp;·&nbsp; 10 泊</div>
 </header>
@@ -524,7 +492,7 @@
         </div>
         <div class="day-header-info">
           <div class="day-region">Otaru</div>
-          <div class="day-hotel">OMO5 小樽 <span class="tag tag-done">已付清</span></div>
+          <div class="day-hotel"><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=OMO5%E5%B0%8F%E6%A8%BD" target="_blank">OMO5 小樽</a> <span class="tag tag-done">已付清</span></div>
         </div>
       </div>
       <div class="day-body">
@@ -532,10 +500,19 @@
           <div class="day-section-label">行程</div>
           <div class="activity-list">
             <div class="activity-item">
+              <span class="activity-time">午</span>
+              <span class="activity-text">小樽散策</span>
+            </div>
+            <div class="activity-item">
               <span class="activity-time">晚</span>
-              <span class="activity-text">小樽運河散步・出拔小路覓食</span>
+              <span class="activity-text"><a class="map-link" href="https://maps.app.goo.gl/xcp28ftzhMdvRaz88" target="_blank">小樽運河遊船</a>　19:15 集合・19:30 開船</span>
             </div>
           </div>
+        </div>
+        <div class="divider-line"></div>
+        <div class="detail-text">
+          JR → 小樽　12:20–13:52 或 12:50–14:15<br>
+          遊船已預約
         </div>
       </div>
     </div>
@@ -549,7 +526,7 @@
         </div>
         <div class="day-header-info">
           <div class="day-region">Yoichi → Sapporo</div>
-          <div class="day-hotel">ランプライトブックスホテル札幌 <span class="tag tag-note">現地付款</span></div>
+          <div class="day-hotel"><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=%E3%83%A9%E3%83%B3%E3%83%97%E3%83%A9%E3%82%A4%E3%83%88%E3%83%96%E3%83%83%E3%82%AF%E3%82%B9%E3%83%9B%E3%83%86%E3%83%AB%E6%9C%AD%E5%B9%8C" target="_blank">ランプライトブックスホテル札幌</a> <span class="tag tag-note">現地付款</span></div>
         </div>
       </div>
       <div class="day-body">
@@ -557,17 +534,21 @@
           <div class="day-section-label">行程</div>
           <div class="activity-list">
             <div class="activity-item">
+              <span class="activity-time">早</span>
+              <span class="activity-text"><a class="map-link" href="https://maps.app.goo.gl/mxd2UxuLGMfTe4sv7" target="_blank">余市蒸餾所</a>（Nikka Whisky）</span>
+            </div>
+            <div class="activity-item">
               <span class="activity-time">午</span>
-              <span class="activity-text">余市蒸餾所（Nikka Whisky）</span>
+              <span class="activity-text">移動至札幌 Check-in・大通公園・PARCO 三越購物</span>
             </div>
             <div class="activity-item">
               <span class="activity-time">晚</span>
-              <span class="activity-text">移動至札幌 Check-in</span>
+              <span class="activity-text"><a class="map-link" href="https://maps.app.goo.gl/fAgjutVq4WWGvpEp9" target="_blank">andsake</a>（清酒關東煮）<span class="tag tag-pending">待定</span></span>
             </div>
           </div>
         </div>
         <div class="divider-line"></div>
-        <div class="detail-text"><span class="en">Check-in 14:00</span>　Superior Double，2大人<br>¥27,304（含稅）　現地付款</div>
+        <div class="detail-text">Check-in 14:00　Superior Double，2大人<br>¥27,304（含稅）　現地付款</div>
       </div>
     </div>
 
@@ -584,7 +565,23 @@
         </div>
       </div>
       <div class="day-body">
-        <div class="detail-text">自由行程</div>
+        <div>
+          <div class="day-section-label">行程</div>
+          <div class="activity-list">
+            <div class="activity-item">
+              <span class="activity-time">早</span>
+              <span class="activity-text">市場早餐</span>
+            </div>
+            <div class="activity-item">
+              <span class="activity-time">午前</span>
+              <span class="activity-text"><a class="map-link" href="https://maps.app.goo.gl/aSPq2Eztrrf5cad46" target="_blank">モエレ沼公園</a>（晨跑＋散步 2.5–3hr）</span>
+            </div>
+            <div class="activity-item">
+              <span class="activity-time">傍晚</span>
+              <span class="activity-text">北海道大學・晚餐 w/ 雨飛</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -597,11 +594,27 @@
         </div>
         <div class="day-header-info">
           <div class="day-region">Sapporo</div>
-          <div class="day-hotel">薄野格蘭貝爾飯店 <span class="tag tag-done">已付清</span></div>
+          <div class="day-hotel"><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=%E8%96%84%E9%87%8E%E6%A0%BC%E8%98%AD%E8%B2%9D%E7%88%BE%E9%A3%AF%E5%BA%97" target="_blank">薄野格蘭貝爾飯店</a> <span class="tag tag-done">已付清</span></div>
         </div>
       </div>
       <div class="day-body">
-        <div class="detail-text">自由行程</div>
+        <div>
+          <div class="day-section-label">行程</div>
+          <div class="activity-list">
+            <div class="activity-item">
+              <span class="activity-time">早</span>
+              <span class="activity-text">輕鬆晨跑</span>
+            </div>
+            <div class="activity-item">
+              <span class="activity-time">午</span>
+              <span class="activity-text">円山公園・北海道神宮</span>
+            </div>
+            <div class="activity-item">
+              <span class="activity-time">晚</span>
+              <span class="activity-text"><a class="map-link" href="https://maps.app.goo.gl/k1AHvscLY28c5KYEA" target="_blank">マンナ食堂</a>（韓式）w/ 子琳</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -626,11 +639,17 @@
               <span class="activity-text">札幌馬拉松</span>
             </div>
             <div class="activity-item">
-              <span class="activity-time">後</span>
-              <span class="activity-text">賽後補給 / 市區緩慢閒晃</span>
+              <span class="activity-time">午</span>
+              <span class="activity-text">賽後補給・市區閒晃＋購物</span>
+            </div>
+            <div class="activity-item">
+              <span class="activity-time">晚</span>
+              <span class="activity-text"><a class="map-link" href="https://maps.app.goo.gl/vvaDvu9Tsu8iCTmX6" target="_blank">羊八</a>（成吉思汗烤肉）w/ 子琳？</span>
             </div>
           </div>
         </div>
+        <div class="divider-line"></div>
+        <div class="detail-text">羊八已預約　20:30　3位</div>
       </div>
     </div>
 
@@ -644,7 +663,7 @@
       <div class="region-line"></div>
     </div>
 
-    <!-- 10/5 -->
+    <!-- 10/5 合併 -->
     <div class="day-card">
       <div class="day-header">
         <div class="day-date-block">
@@ -652,16 +671,40 @@
           <div class="day-date-sub">一</div>
         </div>
         <div class="day-header-info">
-          <div class="day-region">Okayama</div>
-          <div class="day-hotel-en">VIA INN Okayama <span class="tag tag-note">延後扣款</span></div>
+          <div class="day-region">Sapporo → Okayama</div>
+          <div class="day-hotel-en"><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=VIA%20INN%20Okayama%20-%20JR%20WEST%20GROUP" target="_blank">VIA INN Okayama</a> <span class="tag tag-note">延後扣款</span></div>
         </div>
       </div>
       <div class="day-body">
-        <div class="detail-text">
-          <span class="en">Check-in 15:00 · Check-out 10/7 10:00</span><br>
-          岡山 ⇄ 宇野港 往返基地<br>
-          <span class="en">10/2 Agoda</span> 扣款
+        <div>
+          <div class="day-section-label">行程</div>
+          <div class="activity-list">
+            <div class="activity-item">
+              <span class="activity-time">早</span>
+              <span class="activity-text">Check-out・札幌車站寄行李</span>
+            </div>
+            <div class="activity-item">
+              <span class="activity-time">午前</span>
+              <span class="activity-text">北海道／大丸百貨・根室花丸（回轉壽司）</span>
+            </div>
+            <div class="activity-item">
+              <span class="activity-time">午</span>
+              <span class="activity-text">JR 前往新千歲機場　13:00 → 13:37</span>
+            </div>
+            <div class="activity-item">
+              <span class="activity-time"></span>
+              <span class="activity-text" style="font-family:var(--font-en);font-size:13px;color:var(--muted)">NH380　CTS 14:40 → OKJ 16:40</span>
+            </div>
+            <div class="activity-item">
+              <span class="activity-time">晚</span>
+              <span class="activity-text">抵達岡山　Check-in<br>
+                <span style="font-size:12px;color:var(--muted)"><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=%E9%AD%9A%E7%82%89%E5%85%AB+%E5%B2%A1%E5%B1%B1" target="_blank">魚炉八</a> 或 <a class="map-link" href="https://maps.app.goo.gl/uiF15XQYQ5PWbDPF6" target="_blank">Tabito Oden &amp; Sake Bar</a> <span class="tag tag-pending" style="font-size:9px">待定</span></span>
+              </span>
+            </div>
+          </div>
         </div>
+        <div class="divider-line"></div>
+        <div class="detail-text">Check-in 15:00　Check-out 10/7 10:00<br>10/2 Agoda 扣款</div>
       </div>
     </div>
 
@@ -682,21 +725,29 @@
           <div class="day-section-label">行程</div>
           <div class="activity-list">
             <div class="activity-item">
+              <span class="activity-time">9:00</span>
+              <span class="activity-text">取車</span>
+            </div>
+            <div class="activity-item">
               <span class="activity-time"></span>
               <span class="activity-text">直島</span>
+            </div>
+            <div class="activity-item">
+              <span class="activity-time">21:00</span>
+              <span class="activity-text"><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=%E3%83%B4%E3%82%A3%E3%82%A2+%E3%83%91%E3%83%BC%E3%83%81%E3%82%A7+%E5%B2%A1%E5%B1%B1" target="_blank">ヴィア パーチェ</a> <span class="tag tag-done">已預約</span></span>
             </div>
           </div>
         </div>
         <div class="divider-line"></div>
         <div class="ferry-block">
-          <div class="ferry-label">船班 · 10/6　宇野港 ⇄ 直島</div>
+          <div class="ferry-label">船班　宇野港 ⇄ 直島</div>
           <div class="ferry-row">
             <span class="ferry-direction">宇野→直島</span>
-            <input class="ferry-input" type="text" placeholder="__:__ 班">
+            <span class="ferry-time">11:00 → 11:20</span>
           </div>
           <div class="ferry-row">
             <span class="ferry-direction">直島→宇野</span>
-            <input class="ferry-input" type="text" placeholder="__:__ 班">
+            <span class="ferry-time">19:02 → 19:22</span>
           </div>
         </div>
       </div>
@@ -711,7 +762,7 @@
         </div>
         <div class="day-header-info">
           <div class="day-region">Shodoshima</div>
-          <div class="day-hotel-en">edit x seven</div>
+          <div class="day-hotel-en"><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=edit%20x%20seven" target="_blank">edit x seven</a></div>
         </div>
       </div>
       <div class="day-body">
@@ -719,7 +770,7 @@
           <div class="day-section-label">行程</div>
           <div class="activity-list">
             <div class="activity-item">
-              <span class="activity-time">午後</span>
+              <span class="activity-time">午</span>
               <span class="activity-text">醬油藏・橄欖公園一帶</span>
             </div>
             <div class="activity-item">
@@ -730,10 +781,10 @@
         </div>
         <div class="divider-line"></div>
         <div class="ferry-block">
-          <div class="ferry-label">船班 · 10/7　新岡山港 → 小豆島</div>
+          <div class="ferry-label">船班　新岡山港 → 小豆島</div>
           <div class="ferry-row">
             <span class="ferry-direction">新岡山→小豆島</span>
-            <input class="ferry-input" type="text" placeholder="__:__ 班">
+            <span class="ferry-time">10:10 → 11:20</span>
           </div>
         </div>
       </div>
@@ -747,8 +798,8 @@
           <div class="day-date-sub">四</div>
         </div>
         <div class="day-header-info">
-          <div class="day-region">Okayama</div>
-          <div class="day-hotel-en">Dormy Inn Okayama Hot Springs</div>
+          <div class="day-region">Teshima → Okayama</div>
+          <div class="day-hotel-en"><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Dormy%20Inn%20Okayama%20Hot%20Springs" target="_blank">Dormy Inn Okayama Hot Springs</a></div>
         </div>
       </div>
       <div class="day-body">
@@ -760,24 +811,28 @@
               <span class="activity-text">edit x seven 早餐</span>
             </div>
             <div class="activity-item">
-              <span class="activity-time">午後</span>
-              <span class="activity-text">小豆島 → 豐島 → 岡山</span>
+              <span class="activity-time">午</span>
+              <span class="activity-text">豐島</span>
+            </div>
+            <div class="activity-item">
+              <span class="activity-time">晚</span>
+              <span class="activity-text">豐島 → 岡山・21:00 前還車</span>
             </div>
           </div>
         </div>
         <div class="divider-line"></div>
         <div class="ferry-block">
-          <div class="ferry-label">船班 · 10/8　小豆島 → 豐島 → 宇野</div>
+          <div class="ferry-label">船班</div>
           <div class="ferry-row">
             <span class="ferry-direction">小豆→豐島</span>
-            <input class="ferry-input" type="text" placeholder="__:__ 班">
+            <span class="ferry-time">13:10 → 13:40</span>
           </div>
           <div class="ferry-row">
             <span class="ferry-direction">豐島→宇野</span>
-            <input class="ferry-input" type="text" placeholder="__:__ 班">
+            <span class="ferry-time">18:40 → 19:19</span>
           </div>
         </div>
-        <div class="detail-text"><span class="en">Check-in 15:00</span></div>
+        <div class="detail-text">Check-in 15:00</div>
       </div>
     </div>
 
@@ -794,7 +849,7 @@
         </div>
       </div>
       <div class="day-body">
-        <div class="detail-text"><span class="en">IT215 · OKJ 15:55 → TPE 17:40</span></div>
+        <div class="detail-text">IT215　OKJ 15:55 → TPE 17:40</div>
       </div>
     </div>
 
@@ -809,29 +864,29 @@
     </div>
     <div class="todo-section">
       <div class="todo-list">
-        <div class="todo-item checked" onclick="toggleTodo(this)">
-          <div class="todo-check"></div>
-          <span class="todo-text">買 ANA 直飛（CTS → OKJ）</span>
+        <div class="todo-item">
+          <div class="todo-check done"></div>
+          <span class="todo-text done">買 ANA 直飛（CTS → OKJ）</span>
         </div>
-        <div class="todo-item checked" onclick="toggleTodo(this)">
-          <div class="todo-check"></div>
-          <span class="todo-text">小樽 OMO5 訂房</span>
+        <div class="todo-item">
+          <div class="todo-check done"></div>
+          <span class="todo-text done">小樽 OMO5 訂房</span>
         </div>
-        <div class="todo-item checked" onclick="toggleTodo(this)">
-          <div class="todo-check"></div>
-          <span class="todo-text">小豆島訂住宿（edit x seven）</span>
+        <div class="todo-item">
+          <div class="todo-check done"></div>
+          <span class="todo-text done">小豆島訂住宿（edit x seven）</span>
         </div>
-        <div class="todo-item" onclick="toggleTodo(this)">
-          <div class="todo-check"></div>
-          <span class="todo-text">租車</span>
+        <div class="todo-item">
+          <div class="todo-check done"></div>
+          <span class="todo-text done">租車</span>
         </div>
-        <div class="todo-item" onclick="toggleTodo(this)">
-          <div class="todo-check"></div>
-          <span class="todo-text">直島 / 豐島美術館預約</span>
+        <div class="todo-item">
+          <div class="todo-check done"></div>
+          <span class="todo-text done">查船班時刻</span>
         </div>
-        <div class="todo-item" onclick="toggleTodo(this)">
-          <div class="todo-check"></div>
-          <span class="todo-text">查船班時刻</span>
+        <div class="todo-item">
+          <div class="todo-check pending"></div>
+          <span class="todo-text pending">直島 / 豐島美術館預約</span>
         </div>
       </div>
     </div>
@@ -840,19 +895,13 @@
 </main>
 
 <footer class="site-footer">
-  北海道 · 瀨戶內海 &nbsp;·&nbsp; 2025.09.30 – 10.09
+  北海道 · 瀨戶內海 &nbsp;·&nbsp; 2026.09.30 – 10.09
 </footer>
 
 <a class="notion-fab" href="https://app.notion.com/p/2026-1df09ee728ce808ca6dbfc640de5b96f?source=copy_link" target="_blank">
   <span class="notion-fab-icon">✎</span>
   在 Notion 編輯
 </a>
-
-<script>
-  function toggleTodo(el) {
-    el.classList.toggle('checked');
-  }
-</script>
 
 </body>
 </html>
